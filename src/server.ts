@@ -4,18 +4,19 @@ import express, { Application, Express, Request, Response, NextFunction } from "
 
 import banner from "./utils/banner";
 import { Logger, LoggerInterface } from "./utils/logger";
+import { MakeRouteInterface } from "./utils/routes";
 import env from "./env";
+
+interface RegisteredUrlsInterface {
+    method: string,
+    path: string
+}
 
 interface ServerInterface {
     app: Express,
     server: http.Server,
     start(): void
-    registerRoute(basePath: string, method: Application): void
-}
-
-interface RegisteredUrlsInterface {
-    method: string,
-    path: string
+    registerRoute(basePath: string, router: MakeRouteInterface): void
 }
 
 class Server {
@@ -26,7 +27,7 @@ class Server {
 
     private configureMiddleware() {
         // CORS
-        this.app.use(function (req: Request, res: Response, next: NextFunction):void {
+        this.app.use(function (req: Request, res: Response, next: NextFunction): void {
             res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("Access-Control-Allow-Credentials", "true");
             res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
@@ -46,11 +47,6 @@ class Server {
         this._logger = new Logger();
 
         this.configureMiddleware();
-
-        this._addedUrls.push({
-            method: "GET",
-            path: "test path"
-        })
     }
 
     get app(): Express {
@@ -67,8 +63,17 @@ class Server {
         });
     }
 
-    public registerRoute(basePath: string, method: Application): void {
-        this.app.use(basePath, method)
+    public registerRoute(basePath: string, router: MakeRouteInterface): void {
+        const registeredUrls: RegisteredUrlsInterface[] = router.registeredURLs;
+
+        registeredUrls.forEach((item: RegisteredUrlsInterface) => {
+            this._addedUrls.push({
+                method: item.method,
+                path: basePath + item.path
+            });
+        });
+
+        this._app.use(basePath, router.router);
     }
 }
 

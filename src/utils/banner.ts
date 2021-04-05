@@ -31,7 +31,7 @@ const banner = (registeredUrls: any): void => {
         log('');
         log('Registered APIs');
         registeredUrls.forEach((item: any, index: number): void => {
-            log(`${index+1}: ${item.method} ${route()}/${item.path}`);
+            log(`${index+1}: ${item.method.toUpperCase()} ${route()}${item.path}`);
         });
         log('-------------------------------------------------------');
         log('');
