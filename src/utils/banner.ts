@@ -1,6 +1,7 @@
 import env from '../env';
+import { RegisteredUrlsInterface } from "../interfaces";
 
-const banner = (registeredUrls: any): void => {
+const banner = (registeredUrls: RegisteredUrlsInterface[]): void => {
     const log = console.log;
 
     if (env.app.banner) {

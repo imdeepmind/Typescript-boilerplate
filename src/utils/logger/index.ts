@@ -6,13 +6,6 @@ import env from "../../env";
 const { format, createLogger, transports } = winston;
 const { combine, timestamp, printf } = format;
 
-interface LoggerInterface {
-    debug(message: string, ...args: any[]): void;
-    info(message: string, ...args: any[]): void;
-    warn(message: string, ...args: any[]): void;
-    error(message: string, ...args: any[]): void;
-}
-
 class Logger {
     private logger: winston.Logger;
 
@@ -81,5 +74,5 @@ class Logger {
 }
 
 export {
-    Logger, LoggerInterface
+    Logger
 }

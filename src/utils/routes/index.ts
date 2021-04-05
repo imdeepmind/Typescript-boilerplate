@@ -1,16 +1,6 @@
 import { Router } from "express";
 
-
-interface RegisteredUrlsInterface {
-    method: string,
-    path: string
-}
-
-interface MakeRouteInterface {
-    registeredURLs: RegisteredUrlsInterface[],
-    router: Router,
-    registerUrl(method: string, path: string, func: any): void,
-}
+import { RegisteredUrlsInterface, } from "../../interfaces/index";
 
 class MakeRoute {
     private readonly _router: Router;
@@ -55,5 +45,5 @@ class MakeRoute {
 }
 
 export {
-    MakeRoute, MakeRouteInterface
+    MakeRoute
 }

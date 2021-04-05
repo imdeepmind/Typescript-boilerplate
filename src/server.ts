@@ -1,23 +1,11 @@
 import * as http from "http";
-import express, { Application, Express, Request, Response, NextFunction } from "express";
+import express, { Express, Request, Response, NextFunction } from "express";
 
 
 import banner from "./utils/banner";
-import { Logger, LoggerInterface } from "./utils/logger";
-import { MakeRouteInterface } from "./utils/routes";
+import { Logger } from "./utils/logger";
+import { MakeRouteInterface, RegisteredUrlsInterface, LoggerInterface} from "./interfaces";
 import env from "./env";
-
-interface RegisteredUrlsInterface {
-    method: string,
-    path: string
-}
-
-interface ServerInterface {
-    app: Express,
-    server: http.Server,
-    start(): void
-    registerRoute(basePath: string, router: MakeRouteInterface): void
-}
 
 class Server {
     private readonly _app: Express;
@@ -78,5 +66,5 @@ class Server {
 }
 
 export {
-    Server, ServerInterface
+    Server
 };
