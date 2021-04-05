@@ -15,7 +15,7 @@ const toBool = (value: string): boolean => {
 }
 
 const getPortNumber = (): number => {
-    const parsedPort: number = toNumber(getOsEnv("PORT"));
+    const parsedPort: number = toNumber(getOsEnv("APP_PORT"));
     const defaultPort: number = 3000;
 
     if (isNaN(parsedPort)) {
