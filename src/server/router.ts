@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import { RegisteredUrlsInterface, } from "../../interfaces/index";
+import { RegisteredUrlsInterface, } from "../interfaces/index";
 
-class MakeRoute {
+class MakeRouter {
     private readonly _router: Router;
     private _registeredURLs: RegisteredUrlsInterface[] = [];
 
@@ -45,5 +45,5 @@ class MakeRoute {
 }
 
 export {
-    MakeRoute
+    MakeRouter
 }

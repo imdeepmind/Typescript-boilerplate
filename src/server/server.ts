@@ -2,10 +2,10 @@ import * as http from "http";
 import express, { Express, Request, Response, NextFunction } from "express";
 
 
-import banner from "./utils/banner";
-import { Logger } from "./utils/logger";
-import { MakeRouteInterface, RegisteredUrlsInterface, LoggerInterface} from "./interfaces";
-import env from "./env";
+import banner from "../utils/banner";
+import { Logger } from "../utils/logger";
+import { MakeRouterInterface, RegisteredUrlsInterface, LoggerInterface} from "../interfaces";
+import env from "../env";
 
 class Server {
     private readonly _app: Express;
@@ -51,7 +51,7 @@ class Server {
         });
     }
 
-    public registerRoute(basePath: string, router: MakeRouteInterface): void {
+    public registerRoute(basePath: string, router: MakeRouterInterface): void {
         const registeredUrls: RegisteredUrlsInterface[] = router.registeredURLs;
 
         registeredUrls.forEach((item: RegisteredUrlsInterface) => {

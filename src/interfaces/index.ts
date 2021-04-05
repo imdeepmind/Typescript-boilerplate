@@ -38,7 +38,7 @@ interface RegisteredUrlsInterface {
     path: string
 }
 
-interface MakeRouteInterface {
+interface MakeRouterInterface {
     registeredURLs: RegisteredUrlsInterface[],
     router: Router,
     registerUrl(method: string, path: string, func: any): void,
@@ -49,10 +49,10 @@ interface ServerInterface {
     app: Express,
     server: http.Server,
     start(): void
-    registerRoute(basePath: string, router: MakeRouteInterface): void
+    registerRoute(basePath: string, router: MakeRouterInterface): void
 }
 
 
 export {
-    EnvConfigInterface, LoggerInterface, RegisteredUrlsInterface, MakeRouteInterface, ServerInterface
+    EnvConfigInterface, LoggerInterface, RegisteredUrlsInterface, MakeRouterInterface, ServerInterface
 }
