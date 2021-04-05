@@ -1,2 +1,5 @@
-import banner from "./utils/banner";
-banner();
+import { Server, ServerInterface } from "./server";
+
+const server: ServerInterface = new Server();
+
+server.start();

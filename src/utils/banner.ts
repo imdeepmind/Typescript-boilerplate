@@ -1,7 +1,6 @@
-import chalk from 'chalk';
 import env from '../env';
 
-const banner = (): void => {
+const banner = (registeredUrls: any): void => {
     const log = console.log;
 
     if (env.app.banner) {
@@ -28,6 +27,12 @@ const banner = (): void => {
         // if (env.monitor.enabled) {
         //     log(`Monitor      : ${route()}${env.monitor.route}`);
         // }
+        log('-------------------------------------------------------');
+        log('');
+        log('Registered APIs');
+        registeredUrls.forEach((item: any, index: number): void => {
+            log(`${index+1}: ${item.method} ${route()}/${item.path}`);
+        });
         log('-------------------------------------------------------');
         log('');
     } else {
