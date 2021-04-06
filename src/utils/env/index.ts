@@ -1,30 +1,30 @@
-const getOsEnv = (key: string, optional: boolean = true): string => {
-  if (!optional && typeof process.env[key] === "undefined") {
-    throw new Error(`Environment variable ${key} is not set.`);
-  }
+const getOsEnv = (key: string, optional = true): string => {
+    if (!optional && typeof process.env[key] === 'undefined') {
+        throw new Error(`Environment variable ${key} is not set.`);
+    }
 
-  return process.env[key] as string;
+    return process.env[key] as string;
 };
 
 const toNumber = (value: string): number => {
-  return parseInt(value, 10);
+    return parseInt(value, 10);
 };
 
 const toBool = (value: string): boolean => {
-  return value === "true";
+    return value === 'true';
 };
 
 const getPortNumber = (): number => {
-  const parsedPort: number = toNumber(getOsEnv("APP_PORT"));
-  const defaultPort: number = 3000;
+    const parsedPort: number = toNumber(getOsEnv('APP_PORT'));
+    const defaultPort = 3000;
 
-  if (isNaN(parsedPort)) {
+    if (isNaN(parsedPort)) {
+        return defaultPort;
+    }
+    if (parsedPort >= 0) {
+        return parsedPort;
+    }
     return defaultPort;
-  }
-  if (parsedPort >= 0) {
-    return parsedPort;
-  }
-  return defaultPort;
 };
 
 export { getOsEnv, toNumber, toBool, getPortNumber };
