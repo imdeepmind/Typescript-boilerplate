@@ -1,26 +1,14 @@
-import { Request, Response } from 'express';
-import { Server, MakeRouter } from './server';
-import { ServerInterface, MakeRouterInterface } from './interfaces';
+import { Server } from './server';
+import { ServerInterface } from './interfaces';
+
+// Importing Routes
+import { v1Routes } from './routes';
 
 const server: ServerInterface = new Server();
-const router: MakeRouterInterface = new MakeRouter();
 
-/**
- * @openapi
- * /api/v1/test/hello-world:
- *   get:
- *     description: Welcome to swagger-jsdoc!
- *     responses:
- *       200:
- *         description: Returns a mysterious string.
- */
-router.registerUrl(
-    'get',
-    '/hello-world',
-    async (req: Request, res: Response): Promise<Response | void> => {
-        return res.send('Hello World');
-    },
-);
+// Registering router to this application
+const { helloRouter } = v1Routes;
+server.registerRoute('/test', helloRouter);
 
-server.registerRoute('/test', router);
+// Starting the server
 server.start();

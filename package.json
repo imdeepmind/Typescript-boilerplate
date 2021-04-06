@@ -23,6 +23,7 @@
     "dependencies": {
         "chalk": "^4.1.0",
         "express": "^4.17.1",
+        "http-status-codes": "^2.1.4",
         "swagger-jsdoc": "6.0.0",
         "swagger-ui-express": "^4.1.6",
         "winston": "^3.3.3"
