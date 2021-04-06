@@ -1,5 +1,7 @@
 import * as http from 'http';
 import express, { Express, Request, Response, NextFunction } from 'express';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 import banner from '../utils/banner';
 import { Logger } from '../utils/logger';
@@ -35,11 +37,37 @@ class Server {
         );
     }
 
+    private configureSwagger() {
+        const swaggerDefinition = {
+            openapi: '3.0.0',
+            info: {
+                title: env.app.name,
+                version: env.app.version,
+                description: env.app.description,
+            },
+        };
+
+        const options = {
+            swaggerDefinition,
+            // Paths to files containing OpenAPI definitions
+            apis: ['src/*.ts'],
+        };
+
+        const swaggerSpec = swaggerJSDoc(options);
+
+        this._app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+        this._addedUrls.push({
+            method: 'get',
+            path: '/docs',
+        });
+    }
+
     constructor() {
         this._app = express();
         this._logger = new Logger();
 
         this.configureMiddleware();
+        this.configureSwagger();
     }
 
     get app(): Express {
